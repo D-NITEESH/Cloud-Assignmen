@@ -24,6 +24,9 @@ up:
 	kubectl apply -f k8s/ingress.yaml
 	kubectl apply -f k8s/hpa.yaml
 	kubectl -n data rollout status deploy/seaweedfs --timeout=3m
+	@echo "Forwarding SeaweedFS S3 to localhost:8333 ..."
+	kubectl -n data port-forward svc/seaweedfs 8333:8333 --address 127.0.0.1 >/tmp/seaweedfs-portforward.log 2>&1 &
+	sleep 3
 	$(PYTHON) scripts/init_buckets.py --endpoint http://localhost:8333
 	docker build -t cloud-parser:dev service
 	docker build -f worker/Dockerfile -t cloud-parser-worker:dev .

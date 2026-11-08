@@ -151,13 +151,13 @@ The system implements an end-to-end cloud-native machine learning pipeline for a
 - **Latency (p95):** `4700 ms` (SLO $\le 5000$ ms satisfied)
 
 ### Cost Estimation (per 1,000 requests)
-Using `data/rate_card.json` (₹3.50/vCPU-hr, ₹0.45/GiB-hr):
+Using `data/rate_card.json` (INR 3.50/vCPU-hr, INR 0.45/GiB-hr):
 - 2 replicas running at 2 vCPU and 1 GiB limit (the limits in `k8s/deployment.yaml`):
-  $$\text{Hourly Cost} = 2 \times (2 \times 3.50 + 1 \times 0.45) = 2 \times 7.45 = ₹14.90\text{/hour}$$
+  $$\text{Hourly Cost} = 2 \times (2 \times 3.50 + 1 \times 0.45) = 2 \times 7.45 = INR 14.90\text{/hour}$$
 - Requests per hour at `1.10` req/s:
   $$\text{Requests/hour} = 1.10 \times 3600 = 3,955\text{ req/hr}$$
 - Cost per 1,000 requests:
-  $$\text{Cost} = \left(\frac{14.90}{3,955}\right) \times 1000 = ₹3.77\text{ per 1,000 requests}$$
+  $$\text{Cost} = \left(\frac{14.90}{3,955}\right) \times 1000 = INR 3.77\text{ per 1,000 requests}$$
 
 ### Service Level Objective (SLO) & Error Budget
 - **SLO Target:** 99.0% successful requests over a 2-minute load test window.
@@ -174,5 +174,5 @@ Using `data/rate_card.json` (₹3.50/vCPU-hr, ₹0.45/GiB-hr):
 | **Latency & Throughput** | p95 = 4700 ms, 1.10 req/s at 4 users | CPU autoregressive decoding; nested VM is ~8x slower than the host | Quantised model, batched inference, more replicas |
 | **Resource Utilisation**| ~650 MiB of 1 GiB, CPU saturated at the 2-core limit | 4 users already saturate both replicas | Right-size limits and add replicas on a multi-node cluster |
 | **Reliability & Recovery**| Replacement Pod Ready 15 s after deletion under load; 2/224 failures (0.89%) | Single-node k3d cannot survive host failure | Multi-node cluster with topology spread constraints |
-| **Security & Cost** | ₹3.77 per 1k requests | Secret is only base64; no TLS on the Ingress | Sealed secrets, TLS, tighter egress rules |
+| **Security & Cost** | INR 3.77 per 1k requests | Secret is only base64; no TLS on the Ingress | Sealed secrets, TLS, tighter egress rules |
 
