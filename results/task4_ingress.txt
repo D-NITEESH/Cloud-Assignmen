@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK
+Content-Length: 69
+Content-Type: application/json
+Date: Sun, 08 Nov 2026 22:21:28 GMT
+Server: uvicorn
+X-Model-Version: v1
+X-Served-By: command-parser-5c745995f-g7vmb
+
+{"intent":"alarm_set","date":"tomorrow","time":"six am","place":null}

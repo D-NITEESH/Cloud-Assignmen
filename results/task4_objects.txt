@@ -1,0 +1,11 @@
+NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/command-parser   1/1     1            1           7m15s
+
+NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/command-parser   ClusterIP   10.43.238.58   <none>        8000/TCP   7m15s
+
+NAME                                       CLASS     HOSTS   ADDRESS      PORTS   AGE
+ingress.networking.k8s.io/command-parser   traefik   *       172.18.0.3   80      7m15s
+
+NAME                                                 REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser   Deployment/command-parser   cpu: 0%/70%   1         2         1          7m15s

@@ -1,0 +1,4 @@
+NAME                             READY   STATUS    RESTARTS   AGE
+command-parser-88686b7db-t88hm   1/1     Running   0          67s
+command-parser-88686b7db-tspck   0/1     Running   0          6s
+command-parser-88686b7db-tspck   1/1     Running   0          15s

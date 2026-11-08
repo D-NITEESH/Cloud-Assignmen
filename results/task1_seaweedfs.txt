@@ -1,0 +1,8 @@
+NAME                             READY   STATUS    RESTARTS      AGE
+pod/seaweedfs-77f47f9cfb-jblkl   1/1     Running   2 (31s ago)   41s
+
+NAME                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
+service/seaweedfs   ClusterIP   10.43.138.184   <none>        8333/TCP,9333/TCP   9m42s
+
+NAME                                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/seaweedfs-data   Bound    pvc-4143de9a-81cc-4ebb-a95d-1f0309468177   5Gi        RWO            local-path     <unset>                 9m42s

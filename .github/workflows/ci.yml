@@ -1,0 +1,120 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      bad_model:
+        description: 'Test quality gate failure with untrained base model'
+        required: false
+        default: 'false'
+        type: string
+
+jobs:
+  lint:
+    name: 1. Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install linter
+        run: pip install ruff
+
+      - name: Run Ruff check
+        run: ruff check .
+
+  unit-tests:
+    name: 2. Unit Tests
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pytest boto3
+
+      - name: Run test suite
+        run: pytest -v
+
+  evaluate-and-gate:
+    name: 3. Model Evaluation & Quality Gate
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PyTorch and Transformers (CPU)
+        run: |
+          pip install torch transformers --index-url https://download.pytorch.org/whl/cpu
+          pip install pyyaml
+
+      - name: Download model asset from GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p release models/eval_model
+          if [ "${{ github.event.inputs.bad_model }}" = "true" ]; then
+            echo "Testing failure gate with base untrained model..."
+            gh release download final-models -p "pythia70m-base-v1.tar.gz" -D release || python make_base_asset.py
+            tar -xzf release/pythia70m-base-v1.tar.gz -C models/eval_model --strip-components=1
+          else
+            echo "Downloading distilled model v1..."
+            gh release download final-models -p "pythia70m-command-parser-v1.tar.gz" -D release || {
+              echo "Release asset not yet created; creating smoke model for verification"
+              python -c "
+              from transformers import AutoModelForCausalLM, AutoTokenizer
+              m = AutoModelForCausalLM.from_pretrained('EleutherAI/pythia-70m')
+              t = AutoTokenizer.from_pretrained('EleutherAI/pythia-70m')
+              m.save_pretrained('models/eval_model')
+              t.save_pretrained('models/eval_model')
+              "
+            }
+            if [ -f release/pythia70m-command-parser-v1.tar.gz ]; then
+              tar -xzf release/pythia70m-command-parser-v1.tar.gz -C models/eval_model --strip-components=1
+            fi
+          fi
+
+      - name: Run model evaluation on validation set
+        run: |
+          python training/evaluate.py --model models/eval_model --out results/ci_predictions.jsonl
+
+      - name: Quality Gate (score.py --min-validity 95)
+        run: |
+          python tools/score.py results/ci_predictions.jsonl data/validation.jsonl --out results/ci_score.json --min-validity 95
+
+  secret-scan:
+    name: 4. Secret Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks secret scanner
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

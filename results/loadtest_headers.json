@@ -1,0 +1,10 @@
+{
+  "per_replica": {
+    "command-parser-88686b7db-t88hm": 115,
+    "command-parser-88686b7db-44dkp": 35,
+    "command-parser-88686b7db-tspck": 72
+  },
+  "per_model_version": {
+    "v1": 222
+  }
+}

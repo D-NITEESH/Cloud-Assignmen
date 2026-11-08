@@ -1,0 +1,5 @@
+Cold start measurements
+Run 1: 16s
+Run 2: 11s
+Run 3: 11s
+Median cold start: 11s

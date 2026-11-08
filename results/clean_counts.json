@@ -1,0 +1,10 @@
+{
+  "input": 3000,
+  "a_invalid_json": 8,
+  "b_wrong_keys": 3,
+  "c_invalid_intent": 5,
+  "d_slot_not_in_text": 75,
+  "duplicates": 44,
+  "kept": 2865,
+  "train_sha256": "2b17c88cfd3c5a3fa19b8a4029a0a301fb4b13bbd0349d377a32608b29165d2f"
+}

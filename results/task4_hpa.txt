@@ -1,0 +1,14 @@
+NAME             REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+command-parser   Deployment/command-parser   cpu: 0%/70%   1         2         2          17m
+command-parser   Deployment/command-parser   cpu: <unknown>/70%   1         2         1          17m
+command-parser   Deployment/command-parser   cpu: 1%/70%          1         2         1          17m
+command-parser   Deployment/command-parser   cpu: 184%/70%        1         2         1          18m
+command-parser   Deployment/command-parser   cpu: 199%/70%        1         2         2          18m
+command-parser   Deployment/command-parser   cpu: 200%/70%        1         2         2          18m
+command-parser   Deployment/command-parser   cpu: 135%/70%        1         2         2          18m
+command-parser   Deployment/command-parser   cpu: 199%/70%        1         2         2          19m
+command-parser   Deployment/command-parser   cpu: 199%/70%        1         2         2          19m
+command-parser   Deployment/command-parser   cpu: 199%/70%        1         2         2          19m
+command-parser   Deployment/command-parser   cpu: 198%/70%        1         2         2          20m
+command-parser   Deployment/command-parser   cpu: 187%/70%        1         2         2          20m
+command-parser   Deployment/command-parser   cpu: 191%/70%        1         2         2          20m

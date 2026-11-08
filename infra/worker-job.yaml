@@ -1,0 +1,151 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: teacher-worker-0
+  namespace: pipeline
+spec:
+  backoffLimit: 3
+  template:
+    metadata:
+      labels:
+        app: teacher-worker
+        shard: "0"
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: worker
+          image: cloud-parser-worker:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: pipeline-config
+          env:
+            - name: SHARD_INDEX
+              value: "0"
+            - name: SHARD_COUNT
+              value: "4"
+            - name: AWS_ACCESS_KEY_ID
+              value: "local-access-key"
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "local-secret-key"
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "256Mi"
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: teacher-worker-1
+  namespace: pipeline
+spec:
+  backoffLimit: 3
+  template:
+    metadata:
+      labels:
+        app: teacher-worker
+        shard: "1"
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: worker
+          image: cloud-parser-worker:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: pipeline-config
+          env:
+            - name: SHARD_INDEX
+              value: "1"
+            - name: SHARD_COUNT
+              value: "4"
+            - name: AWS_ACCESS_KEY_ID
+              value: "local-access-key"
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "local-secret-key"
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "256Mi"
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: teacher-worker-2
+  namespace: pipeline
+spec:
+  backoffLimit: 3
+  template:
+    metadata:
+      labels:
+        app: teacher-worker
+        shard: "2"
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: worker
+          image: cloud-parser-worker:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: pipeline-config
+          env:
+            - name: SHARD_INDEX
+              value: "2"
+            - name: SHARD_COUNT
+              value: "4"
+            - name: AWS_ACCESS_KEY_ID
+              value: "local-access-key"
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "local-secret-key"
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "256Mi"
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: teacher-worker-3
+  namespace: pipeline
+spec:
+  backoffLimit: 3
+  template:
+    metadata:
+      labels:
+        app: teacher-worker
+        shard: "3"
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: worker
+          image: cloud-parser-worker:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: pipeline-config
+          env:
+            - name: SHARD_INDEX
+              value: "3"
+            - name: SHARD_COUNT
+              value: "4"
+            - name: AWS_ACCESS_KEY_ID
+              value: "local-access-key"
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "local-secret-key"
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "256Mi"
+            limits:
+              cpu: "1"
+              memory: "512Mi"

@@ -1,0 +1,2 @@
+NAME                 STATUS   ROLES                  AGE   VERSION        INTERNAL-IP   EXTERNAL-IP   OS-IMAGE           KERNEL-VERSION      CONTAINER-RUNTIME
+k3d-cloud-server-0   Ready    control-plane,master   12s   v1.31.5+k3s1   172.18.0.3    <none>        K3s v1.31.5+k3s1   6.8.0-117-generic   containerd://1.7.23-k3s2
