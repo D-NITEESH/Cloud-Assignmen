@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pipeline-config
+  namespace: pipeline
+data:
+  OLLAMA_URL: "http://host.docker.internal:11434"
+  MODEL: "phi3.5"
+  PROMPT_FILE: "/app/prompts/teacher_prompt.txt"
+  S3_ENDPOINT: "http://seaweedfs.data.svc.cluster.local:8333"
+  CHECKPOINT: "20"

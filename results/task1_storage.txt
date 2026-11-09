@@ -1,0 +1,10 @@
+total 1060
+-rw-r--r--    1 seaweed  seaweed      28928 Nov  8 21:54 1.dat
+-rw-r--r--    1 seaweed  seaweed        192 Nov  8 21:54 1.idx
+-rw-r--r--    1 seaweed  seaweed        194 Nov  8 20:00 1.vif
+-rw-r--r--    1 seaweed  seaweed      27400 Nov  8 21:48 2.dat
+-rw-r--r--    1 seaweed  seaweed        192 Nov  8 21:48 2.idx
+-rw-r--r--    1 seaweed  seaweed        194 Nov  8 20:00 2.vif
+-rw-r--r--    1 seaweed  seaweed      17760 Nov  8 21:55 3.dat
+-rw-r--r--    1 seaweed  seaweed         96 Nov  8 21:55 3.idx
+-rw-r--r--    1 seaweed  seaweed        194 Nov  8 20:00 3.vif

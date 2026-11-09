@@ -1,0 +1,19 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: cloud
+servers: 1
+agents: 0
+ports:
+  - port: 8080:80
+    nodeFilters:
+      - loadbalancer
+  - port: 8333:8333
+    nodeFilters:
+      - loadbalancer
+options:
+  k3d:
+    wait: true
+  kubeconfig:
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true

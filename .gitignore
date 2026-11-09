@@ -1,0 +1,35 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.ruff_cache/
+
+# Model weights and artifacts (NEVER committed per assignment rules)
+models/
+release/*.tar.gz
+*.bin
+*.safetensors
+*.pt
+*.pth
+
+# Results logs and temporary files
+*.log
+results/loadtest_*.csv
+results/metrics_*.csv
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+
+# Local toolchain / storage used during development
+.weed/
+.bin/

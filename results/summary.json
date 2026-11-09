@@ -1,0 +1,18 @@
+{
+  "total_requests": 131,
+  "failures": 1,
+  "error_rate_percent": 0.763,
+  "p50_ms": 3600.0,
+  "p95_ms": 4700.0,
+  "requests_per_second": 1.1,
+  "replicas": 2,
+  "cpu_limit": 2.0,
+  "memory_limit_gib": 1.0,
+  "hourly_cost_inr": 14.9,
+  "requests_per_hour": 3955.0,
+  "cost_per_1000_inr": 3.7671,
+  "slo_error_rate_ok": true,
+  "slo_p95_latency_ok": true,
+  "error_budget_percent": 0.237,
+  "currency": "INR"
+}
